@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/semi": "off",
+    "constructor-super": "off",
+    "@typescript-eslint/space-before-function-paren": "off",
+    "@typescript-eslint/parser": "off",
+    "@typescript-eslint/indent": "off"
+  },
+  "extends": "standard-with-typescript"
+}
