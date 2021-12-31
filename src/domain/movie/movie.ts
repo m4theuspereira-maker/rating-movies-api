@@ -1,5 +1,5 @@
-import { Actor } from "../actor/actor";
-import { Director } from "../director/director";
+import { Actor } from "./actor";
+import { Director } from "./director";
 
 export interface Movie {
   title: string;
