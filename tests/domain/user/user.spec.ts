@@ -10,10 +10,11 @@ describe("UserEntity", () => {
     passowrdRepeat: "any_password",
   };
 
-  it("should call the method to create user", () => {
+  beforeAll(() => {
     userEntity = mock();
-    /// const userEntity = new UserEntity();
+  });
 
+  it("should call the method to create user", () => {
     const createUserSpy = jest.spyOn(userEntity, "createUser");
     userEntity.createUser(USER_DATA);
     expect(createUserSpy).toHaveBeenCalled();
