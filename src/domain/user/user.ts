@@ -1,3 +1,5 @@
+import { BusinessError } from "../errors/business-error";
+
 export interface User {
   name: string;
   email: string;
@@ -12,6 +14,11 @@ export interface createUserDto {
   password: string;
   passowrdRepeat: string;
 }
+
+export type UserCreationResult = {
+  error: BusinessError;
+  success: User;
+};
 
 export class UserEntity {
   createUser(user: createUserDto): void {}
