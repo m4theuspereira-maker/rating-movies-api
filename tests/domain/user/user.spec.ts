@@ -1,9 +1,4 @@
-import {
-  createUserDto,
-  UserEntity,
-  UserCreationResult,
-  User,
-} from "@/domain/user/user";
+import { createUserDto, UserEntity, USER_ROLES } from "@/domain/user/user";
 import { mock, MockProxy } from "jest-mock-extended";
 import { BusinessError } from "@/domain/errors/business-error";
 
@@ -40,7 +35,7 @@ describe("UserEntity", () => {
     );
   });
 
-  it("should return false if password and return is different", () => {
+  it("should return false if password is invalid", () => {
     const sut = new UserEntity();
     const isValidPassowrd = sut.validatePassword(
       "any_password",
@@ -49,7 +44,7 @@ describe("UserEntity", () => {
     expect(isValidPassowrd).toEqual(false);
   });
 
-  it("should return false if password and return is different", () => {
+  it("should return true if password is valid", () => {
     const isValidPassowrd = userEntitySut.validatePassword(
       "any_password",
       "any_password"
@@ -89,5 +84,22 @@ describe("UserEntity", () => {
     });
 
     expect(invalidUser).toEqual(new BusinessError());
+  });
+
+  it("should return an user all params match", () => {
+    const validUser = userEntitySut.createUser({
+      name: "any name",
+      email: "any_email@mail.com",
+      password: "any_password",
+      passowrdRepeat: "any_password",
+    });
+
+    expect(validUser).toStrictEqual({
+      name: "any name",
+      email: "any_email@mail.com",
+      password: "any_password",
+      role: USER_ROLES.USER,
+      isActive: true,
+    });
   });
 });

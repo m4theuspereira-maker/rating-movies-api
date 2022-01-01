@@ -1,4 +1,4 @@
-export interface Rate {
+export interface Rating {
   movieId: string;
   userId: string;
   score: number;

@@ -15,6 +15,11 @@ export interface createUserDto {
   passowrdRepeat: string;
 }
 
+export const USER_ROLES = {
+  ADM: "adm",
+  USER: "user",
+};
+
 export type UserCreationResult = BusinessError | User;
 
 export class UserEntity {
@@ -26,10 +31,19 @@ export class UserEntity {
 
     const isEmailValid = this.validateEmail(user.email);
 
-    if (!isValidPassword || isEmailValid) {
+    if (!isValidPassword || !isEmailValid) {
       return new BusinessError();
     }
-    return new BusinessError();
+
+    const validUser = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      isActive: true,
+      role: USER_ROLES.USER,
+    };
+
+    return validUser;
   }
 
   validatePassword(password: string, passowrdRepeat: string): boolean {
