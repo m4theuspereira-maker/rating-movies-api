@@ -102,7 +102,7 @@ describe("UserEntity", () => {
     expect(validUser).toStrictEqual({
       name: "any name",
       email: "any_email@mail.com",
-      password: "any_password",
+      password: hashed,
       role: USER_ROLES.USER,
       isActive: true,
     });

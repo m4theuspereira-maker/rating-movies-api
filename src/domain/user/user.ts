@@ -45,7 +45,7 @@ export class UserEntity {
     const validUser = {
       name: user.name,
       email: user.email,
-      password: user.password,
+      password: passwordHashed,
       isActive: true,
       role: USER_ROLES.USER,
     };
