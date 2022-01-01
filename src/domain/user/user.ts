@@ -1,3 +1,4 @@
+import { HashUserPassword } from "@/domain/authentication/hash-user-password";
 import { BusinessError } from "../errors/business-error";
 
 export interface User {
@@ -23,7 +24,9 @@ export const USER_ROLES = {
 export type UserCreationResult = BusinessError | User;
 
 export class UserEntity {
-  createUser(user: createUserDto): UserCreationResult {
+  constructor(private readonly hashUserPassword: HashUserPassword) {}
+
+  async createUser(user: createUserDto): Promise<UserCreationResult> {
     const isValidPassword = this.validatePassword(
       user.password,
       user.passowrdRepeat
@@ -34,6 +37,10 @@ export class UserEntity {
     if (!isValidPassword || !isEmailValid) {
       return new BusinessError();
     }
+
+    const passwordHashed = await this.hashUserPassword.hashPassword(
+      user.password
+    );
 
     const validUser = {
       name: user.name,

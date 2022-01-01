@@ -1,9 +1,11 @@
 import { createUserDto, UserEntity, USER_ROLES } from "@/domain/user/user";
 import { mock, MockProxy } from "jest-mock-extended";
 import { BusinessError } from "@/domain/errors/business-error";
+import { HashUserPassword } from "@/domain/authentication/hash-user-password";
 
 describe("UserEntity", () => {
   let userEntitySut: UserEntity;
+  let hashUserPassword: MockProxy<HashUserPassword>;
   let userEntity: MockProxy<UserEntity>;
   const USER_DATA: createUserDto = {
     name: "any name",
@@ -13,7 +15,9 @@ describe("UserEntity", () => {
   };
 
   beforeAll(() => {
-    (userEntitySut = new UserEntity()), (userEntity = mock());
+    (hashUserPassword = mock()),
+      (userEntitySut = new UserEntity(hashUserPassword)),
+      (userEntity = mock());
   });
 
   it("should call the method to create user", () => {
@@ -36,8 +40,7 @@ describe("UserEntity", () => {
   });
 
   it("should return false if password is invalid", () => {
-    const sut = new UserEntity();
-    const isValidPassowrd = sut.validatePassword(
+    const isValidPassowrd = userEntitySut.validatePassword(
       "any_password",
       "some_password"
     );
@@ -52,8 +55,8 @@ describe("UserEntity", () => {
     expect(isValidPassowrd).toEqual(true);
   });
 
-  it("should call the method to create user", () => {
-    const userCreated = userEntitySut.createUser({
+  it("should call the method to create user", async () => {
+    const userCreated = await userEntitySut.createUser({
       name: "any name",
       email: "any_email@mail.com",
       password: "any_password",
@@ -75,8 +78,8 @@ describe("UserEntity", () => {
     expect(validEmail).toEqual(true);
   });
 
-  it("should return an error if invalid email", () => {
-    const invalidUser = userEntitySut.createUser({
+  it("should return an error if invalid email", async () => {
+    const invalidUser = await userEntitySut.createUser({
       name: "any name",
       email: "any_emaimail.com",
       password: "any_password",
@@ -86,8 +89,8 @@ describe("UserEntity", () => {
     expect(invalidUser).toEqual(new BusinessError());
   });
 
-  it("should return an user all params match", () => {
-    const validUser = userEntitySut.createUser({
+  it("should return an user all params match", async () => {
+    const validUser = await userEntitySut.createUser({
       name: "any name",
       email: "any_email@mail.com",
       password: "any_password",

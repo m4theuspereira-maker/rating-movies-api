@@ -1,5 +1,6 @@
 import { mock, MockProxy } from "jest-mock-extended";
 import { Argon2Encrypter } from "@/infraestructure/encrypter/argon2-encrypter";
+import { ServerError } from "@/infraestructure/errors/server-error";
 
 describe("argon2 encrypter test", () => {
   let argonEncrypter: MockProxy<Argon2Encrypter>;
@@ -12,7 +13,7 @@ describe("argon2 encrypter test", () => {
   });
 
   beforeEach(() => {
-    argonEncrypter.hashPassword.mockResolvedValueOnce(hash);
+    argonEncrypter.hashPassword.mockResolvedValue(hash);
   });
 
   test("should call argon2 encrypter with password", () => {
@@ -23,7 +24,15 @@ describe("argon2 encrypter test", () => {
 
   test("should return a hashed password", async () => {
     const hashedPassword = await argonEncrypter.hashPassword(password);
-
     expect(hashedPassword).toEqual(hash);
+  });
+
+  test("should throw an error ", async () => {
+    argonEncrypter.hashPassword.mockRejectedValueOnce(() => {
+      throw new ServerError();
+    });
+
+    const hashedPasswordPromise = argonEncrypter.hashPassword(password);
+    await expect(hashedPasswordPromise).rejects.toThrow(new ServerError());
   });
 });
