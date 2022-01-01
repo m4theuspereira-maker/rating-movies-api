@@ -13,9 +13,11 @@ describe("UserEntity", () => {
     password: "any_password",
     passowrdRepeat: "any_password",
   };
+  const hashed = "any_password_hashed";
 
   beforeAll(() => {
     (hashUserPassword = mock()),
+      hashUserPassword.hashPassword.mockImplementationOnce(async () => hashed),
       (userEntitySut = new UserEntity(hashUserPassword)),
       (userEntity = mock());
   });
