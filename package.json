@@ -1,6 +1,10 @@
 {
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig-build.json"
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "yarn test -- --watch",
+    "test:coverage": "yarn test -- --coverage",
+    "test:staged": "yarn test -- --findRelatedTests"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
