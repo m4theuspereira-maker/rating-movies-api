@@ -1,9 +1,26 @@
-import { Rating } from "./rating";
+import { MockProxy, mock } from "jest-mock-extended";
+import { createRatingDto, RatingEntity } from "@/domain/rating/rating";
 
 describe("Rating Entity", () => {
-  test("should call create rating", () => {});
-});
+  let ratingEntity: MockProxy<RatingEntity>;
+  const RATING_DATA: createRatingDto = {
+    userId: "any_user_id",
+    movieId: "any_movie_id",
+    score: 3,
+    comment: "any_comment",
+  };
 
-export class RatingEntity {
-  createRating(): void {}
-}
+  beforeAll(() => {
+    ratingEntity = mock();
+  });
+  test("should call create rating", () => {
+    const ratingEntitySpy = jest.spyOn(ratingEntity, "createRating");
+    ratingEntity.createRating(RATING_DATA);
+    expect(ratingEntitySpy).toHaveBeenCalled();
+  });
+
+  test("should call createRating with rating data", () => {
+    ratingEntity.createRating(RATING_DATA);
+    expect(ratingEntity.createRating).toBeCalledWith(RATING_DATA);
+  });
+});
