@@ -13,7 +13,7 @@ export interface createUserDto {
   name: string;
   email: string;
   password: string;
-  passowrdRepeat: string;
+  passwordRepeat: string;
 }
 
 export const USER_ROLES = {
@@ -29,7 +29,7 @@ export class UserEntity {
   async createUser(user: createUserDto): Promise<UserCreationResult> {
     const isValidPassword = this.validatePassword(
       user.password,
-      user.passowrdRepeat
+      user.passwordRepeat
     );
 
     const isEmailValid = this.validateEmail(user.email);
