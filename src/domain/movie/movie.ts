@@ -4,6 +4,6 @@ import { Director } from "./director";
 export interface Movie {
   title: string;
   actors: Array<Actor>;
-  director: Director;
+  director: Director | Array<Director>;
   gender: string;
 }
