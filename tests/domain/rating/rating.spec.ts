@@ -1,5 +1,6 @@
 import { MockProxy, mock } from "jest-mock-extended";
 import { createRatingDto, RatingEntity } from "@/domain/rating/rating";
+import { BusinessError } from "@/domain/errors/business-error";
 
 describe("Rating Entity", () => {
   let ratingEntitySut: RatingEntity;
@@ -45,5 +46,16 @@ describe("Rating Entity", () => {
     );
 
     expect(validateCommnetResult).toEqual(true);
+  });
+
+  test("should return a business error if an invalid comment", () => {
+    const createRatingResult = ratingEntitySut.createRating({
+      comment: "any_com",
+      userId: "any_user_id",
+      movieId: "any_movie_id",
+      score: 3,
+    });
+
+    expect(createRatingResult).toEqual(new BusinessError());
   });
 });

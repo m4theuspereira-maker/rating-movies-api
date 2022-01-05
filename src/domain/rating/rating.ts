@@ -15,17 +15,34 @@ export interface createRatingDto {
   comment?: string;
 }
 
+export type RatingCreationResult = Rating | BusinessError;
+
 export class RatingEntity {
-  createRating({ movieId, score, comment, userId }: createRatingDto): void {
-    let isCommentValid = true;
+  createRating({
+    movieId,
+    score,
+    comment,
+    userId,
+  }: createRatingDto): RatingCreationResult {
+    let rating: Rating;
+
+    rating = {
+      userId: userId,
+      movieId: movieId,
+      score: score,
+      isActive: true,
+    };
 
     if (comment !== undefined) {
-      isCommentValid = this.validateComment(comment);
+      const isCommentValid = this.validateComment(comment);
+      if (!isCommentValid) {
+        return new BusinessError();
+      }
+
+      rating.comment = comment;
     }
 
-    if (!isCommentValid) {
-      throw new BusinessError();
-    }
+    return rating;
   }
 
   validateComment(comment: string = ""): boolean {
