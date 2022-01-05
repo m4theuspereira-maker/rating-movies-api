@@ -58,4 +58,31 @@ describe("Rating Entity", () => {
 
     expect(createRatingResult).toEqual(new BusinessError());
   });
+
+  test("should return a valid rating if the data were right", () => {
+    const validRatinWithComment = ratingEntitySut.createRating(RATING_DATA);
+
+    expect(validRatinWithComment).toStrictEqual({
+      userId: "any_user_id",
+      movieId: "any_movie_id",
+      score: 3,
+      isActive: true,
+      comment: "any_comment",
+    });
+  });
+
+  test("should return a valid rating without comment if data were right", () => {
+    const validRatingWithoutComment = ratingEntitySut.createRating({
+      userId: "any_user_id",
+      movieId: "any_movie_id",
+      score: 3,
+    });
+
+    expect(validRatingWithoutComment).toStrictEqual({
+      userId: "any_user_id",
+      movieId: "any_movie_id",
+      score: 3,
+      isActive: true,
+    });
+  });
 });
