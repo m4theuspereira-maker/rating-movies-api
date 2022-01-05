@@ -14,12 +14,12 @@ export interface createRatingDto {
 }
 
 export class RatingEntity {
-  createRating(rating: createRatingDto): void {}
+  createRating({ movieId, score, comment }: createRatingDto): void {}
 
   validateComment(comment: string = ""): boolean {
-    let isCommentValid = false;
+    let isCommentValid = true;
 
-    if (comment.length < 10) {
+    if (comment.length <= 10) {
       isCommentValid = false;
     }
 
