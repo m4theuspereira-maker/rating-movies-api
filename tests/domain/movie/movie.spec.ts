@@ -1,4 +1,4 @@
-import { MovieEntity } from "@/domain/movie/movie";
+import { MovieEntity } from "@/domain/movie/";
 import { mock, MockProxy } from "jest-mock-extended";
 
 describe("Movie Entity", () => {
