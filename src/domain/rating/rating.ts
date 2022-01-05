@@ -1,3 +1,5 @@
+import { BusinessError } from "../errors/business-error";
+
 export interface Rating {
   movieId: string;
   userId: string;
@@ -14,7 +16,17 @@ export interface createRatingDto {
 }
 
 export class RatingEntity {
-  createRating({ movieId, score, comment }: createRatingDto): void {}
+  createRating({ movieId, score, comment, userId }: createRatingDto): void {
+    let isCommentValid = true;
+
+    if (comment !== undefined) {
+      isCommentValid = this.validateComment(comment);
+    }
+
+    if (!isCommentValid) {
+      throw new BusinessError();
+    }
+  }
 
   validateComment(comment: string = ""): boolean {
     let isCommentValid = true;
