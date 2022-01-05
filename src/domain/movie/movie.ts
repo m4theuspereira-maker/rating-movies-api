@@ -6,5 +6,4 @@ export interface Movie {
   actors: Array<Actor>;
   director: Director;
   gender: string;
-  average: number;
 }
