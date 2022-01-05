@@ -23,4 +23,11 @@ describe("Rating Entity", () => {
     ratingEntity.createRating(RATING_DATA);
     expect(ratingEntity.createRating).toBeCalledWith(RATING_DATA);
   });
+
+  test("should call validate comment with comment", () => {
+    ratingEntity.validateComment(RATING_DATA.comment!!);
+    expect(ratingEntity.validateComment).toHaveBeenCalledWith(
+      RATING_DATA.comment
+    );
+  });
 });
