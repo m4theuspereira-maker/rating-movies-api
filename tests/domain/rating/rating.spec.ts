@@ -59,6 +59,16 @@ describe("Rating Entity", () => {
     expect(createRatingResult).toEqual(new BusinessError());
   });
 
+  test("should return business error of invalid score", () => {
+    const validRatinWithComment = ratingEntitySut.createRating({
+      userId: "any_user_id",
+      movieId: "any_movie_id",
+      score: 6,
+    });
+
+    expect(validRatinWithComment).toEqual(new BusinessError());
+  });
+
   test("should return a valid rating if the data were right", () => {
     const validRatinWithComment = ratingEntitySut.createRating(RATING_DATA);
 

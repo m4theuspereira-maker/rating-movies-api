@@ -26,6 +26,12 @@ export class RatingEntity {
   }: createRatingDto): RatingCreationResult {
     let rating: Rating;
 
+    const isScoreValid = this.validateScore(score);
+
+    if (!isScoreValid) {
+      return new BusinessError();
+    }
+
     rating = {
       userId: userId,
       movieId: movieId,
@@ -53,5 +59,15 @@ export class RatingEntity {
     }
 
     return isCommentValid;
+  }
+
+  validateScore(score: number): boolean {
+    let isScoreValid = true;
+
+    if (score > 5 || score < 1) {
+      isScoreValid = false;
+    }
+
+    return isScoreValid;
   }
 }
