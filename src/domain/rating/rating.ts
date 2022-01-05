@@ -16,7 +16,7 @@ export interface createRatingDto {
 export class RatingEntity {
   createRating(rating: createRatingDto): void {}
 
-  validateComment(comment: string): boolean {
+  validateComment(comment: string = ""): boolean {
     let isCommentValid = false;
 
     if (comment.length < 10) {
