@@ -7,3 +7,7 @@ export interface Movie {
   director: Director | Array<Director>;
   gender: string;
 }
+
+export class MovieEntity {
+  createMovie(createMovieDto: Movie): void {}
+}

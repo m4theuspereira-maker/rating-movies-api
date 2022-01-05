@@ -1,4 +1,4 @@
-import { Movie } from "@/domain/movie/movie";
+import { MovieEntity } from "@/domain/movie/movie";
 import { mock, MockProxy } from "jest-mock-extended";
 
 describe("Movie Entity", () => {
@@ -33,7 +33,3 @@ describe("Movie Entity", () => {
     expect(movieEntitySpy).toHaveBeenCalledWith(MOVIE_DATA);
   });
 });
-
-export class MovieEntity {
-  createMovie(createMovieDto: Movie): void {}
-}
