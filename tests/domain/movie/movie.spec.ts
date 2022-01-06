@@ -39,7 +39,5 @@ describe("Movie Entity", () => {
     const movie = movieEntitySut.createMovie(MOVIE_DATA);
 
     expect(movie).toStrictEqual(MOVIE_DATA);
-
-    console.log(movie);
   });
 });
