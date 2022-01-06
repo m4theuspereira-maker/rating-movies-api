@@ -1,3 +1,4 @@
+import { BusinessError } from "../errors/business-error";
 import { Actor } from "./actor";
 import { Director } from "./director";
 
@@ -8,6 +9,14 @@ export interface Movie {
   gender: string;
 }
 
+export type MovieCreationResult = BusinessError | Movie;
+
 export class MovieEntity {
-  createMovie(createMovieDto: Movie): void {}
+  createMovie(createMovieDto: Movie): MovieCreationResult {
+    const movie = {
+      ...createMovieDto,
+    };
+
+    return movie;
+  }
 }

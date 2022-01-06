@@ -3,6 +3,7 @@ import { mock, MockProxy } from "jest-mock-extended";
 
 describe("Movie Entity", () => {
   let movieEntity: MockProxy<MovieEntity>;
+  let movieEntitySut: MovieEntity;
   const MOVIE_DATA = {
     title: "any_movie_title",
     actors: [
@@ -15,6 +16,7 @@ describe("Movie Entity", () => {
 
   beforeAll(() => {
     movieEntity = mock();
+    movieEntitySut = new MovieEntity();
   });
 
   test("should call createMovie", () => {
@@ -31,5 +33,13 @@ describe("Movie Entity", () => {
     movieEntity.createMovie(MOVIE_DATA);
 
     expect(movieEntitySpy).toHaveBeenCalledWith(MOVIE_DATA);
+  });
+
+  test("should return an user", () => {
+    const movie = movieEntitySut.createMovie(MOVIE_DATA);
+
+    expect(movie).toStrictEqual(MOVIE_DATA);
+
+    console.log(movie);
   });
 });
