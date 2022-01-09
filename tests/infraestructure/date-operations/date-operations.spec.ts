@@ -1,8 +1,8 @@
-import { DateHelper, getAgeByBirthDateDto } from "@/domain/date/date-helper";
 import { BusinessError } from "@/domain/errors/business-error";
+import { DateOperations } from "@/infraestructure/date-operations/date-operations";
 
 describe("date-operations", () => {
-  let dateOperationsSut: DateHelper;
+  let dateOperationsSut: DateOperations;
   const AGE = 22;
   const BIRTH_DATE = {
     day: "01",
@@ -31,13 +31,3 @@ describe("date-operations", () => {
     expect(validAge).toEqual(22);
   });
 });
-
-export class DateOperations implements DateHelper {
-  getAgeByBirthDate({ day, month, year }: getAgeByBirthDateDto): number {
-    const birthDate = new Date(`${month}/${day}/${year}`);
-    const now = new Date();
-    const age = now.getUTCFullYear() - birthDate.getUTCFullYear();
-
-    return age;
-  }
-}
