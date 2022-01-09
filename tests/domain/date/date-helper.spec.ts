@@ -1,4 +1,5 @@
 import { mock, MockProxy } from "jest-mock-extended";
+import { DateHelper } from "@/domain/date/date-helper";
 
 describe("hash-user-password", () => {
   let dateHelper: MockProxy<DateHelper>;
@@ -7,7 +8,7 @@ describe("hash-user-password", () => {
 
   beforeAll(() => {
     dateHelper = mock();
-    dateHelper.getAgeByBirthDate.mockImplementationOnce(() => AGE);
+    //dateHelper.getAgeByBirthDate.mockImplementationOnce(() => AGE);
   });
 
   test("should call method from data helper", () => {
@@ -25,16 +26,4 @@ describe("hash-user-password", () => {
 
     expect(getAgeByBirthDateSpy).toHaveBeenCalledWith(BIRTH_DATE);
   });
-
-  test("should call method from data helper", () => {
-    const getAgeByBirthDateSpy = jest.spyOn(dateHelper, "getAgeByBirthDate");
-
-    dateHelper.getAgeByBirthDate(BIRTH_DATE);
-
-    expect(getAgeByBirthDateSpy).toHaveBeenCalledWith(BIRTH_DATE);
-  });
 });
-
-export interface DateHelper {
-  getAgeByBirthDate(birthDate: string): number;
-}
