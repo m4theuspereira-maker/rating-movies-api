@@ -1,4 +1,4 @@
-import { getAgeByBirthDateDto } from "../date/date-helper";
+import { DateHelper, getAgeByBirthDateDto } from "../date/date-helper";
 import { BusinessError } from "../errors/business-error";
 import { Actor } from "./actor";
 import { Director } from "./director";
@@ -6,16 +6,14 @@ import { Director } from "./director";
 export interface Movie {
   title: string;
   actors: Array<Actor>;
-  director: Director | Array<Director>;
+  director: Director;
   gender: string;
 }
 
 export interface createMovieDto {
   title: string;
   actors: Array<createMovieActorAndDirectorDto>;
-  director:
-    | createMovieActorAndDirectorDto
-    | Array<createMovieActorAndDirectorDto>;
+  director: createMovieActorAndDirectorDto;
   gender: string;
 }
 
@@ -27,9 +25,40 @@ export interface createMovieActorAndDirectorDto {
 export type MovieCreationResult = BusinessError | Movie;
 
 export class MovieEntity {
-  createMovie(createMovieDto: Movie): MovieCreationResult {
-    const movie = {
-      ...createMovieDto,
+  constructor(private readonly dateHelper: DateHelper) {}
+
+  createMovie({
+    title,
+    actors,
+    director,
+    gender,
+  }: createMovieDto): MovieCreationResult {
+    let actorsWithAge: Array<Actor> = [];
+
+    actors.forEach((actor) => {
+      actorsWithAge.push({
+        name: actor.name,
+        age: this.dateHelper.getAgeByBirthDate(actor.birthDate),
+      });
+    });
+
+    const directorWithAge: Director = {
+      name: director.name,
+      age: this.dateHelper.getAgeByBirthDate(director.birthDate),
+    };
+
+    const someActorOrDirectorWithNegativeAge =
+      actorsWithAge.some((actor) => actor.age < 1) || directorWithAge.age < 1;
+
+    if (someActorOrDirectorWithNegativeAge) {
+      return new BusinessError();
+    }
+
+    const movie: Movie = {
+      title,
+      actors: actorsWithAge,
+      director: directorWithAge,
+      gender,
     };
 
     return movie;
