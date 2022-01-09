@@ -4,7 +4,11 @@ import { DateHelper } from "@/domain/date/date-helper";
 describe("hash-user-password", () => {
   let dateHelper: MockProxy<DateHelper>;
   const AGE = 22;
-  const BIRTH_DATE = "01/01/2000";
+  const BIRTH_DATE = {
+    day: "01",
+    month: "01",
+    year: "2000",
+  };
 
   beforeAll(() => {
     dateHelper = mock();
