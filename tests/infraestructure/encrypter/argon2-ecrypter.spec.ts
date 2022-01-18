@@ -1,5 +1,5 @@
 import { mock, MockProxy } from "jest-mock-extended";
-import { Argon2Encrypter } from "@/infraestructure/encrypter/argon2-encrypter";
+import { Argon2Encrypter } from "@/infraestructure/encrypter/password/argon2-encrypter";
 import { ServerError } from "@/infraestructure/errors/server-error";
 
 describe("argon2 encrypter test", () => {
