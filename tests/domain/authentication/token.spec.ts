@@ -1,11 +1,15 @@
 import { mock, MockProxy } from "jest-mock-extended";
-import { TokenDecoder, TokenEncoder } from "./token";
+import { GenerateTokenDto, TokenDecoder, TokenEncoder } from "./token";
 
 describe("hash-user-password", () => {
   let tokenDecoder: MockProxy<TokenDecoder>;
   let tokenEncoder: MockProxy<TokenEncoder>;
 
-  const TOKEN_PAYLOAD = {};
+  const TOKEN_PAYLOAD: GenerateTokenDto = {
+    id: "any_id",
+    type: "any_type",
+    isActive: true,
+  };
   const token = "any_token";
 
   beforeAll(() => {
