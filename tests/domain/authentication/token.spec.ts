@@ -5,6 +5,9 @@ describe("hash-user-password", () => {
   let tokenDecoder: MockProxy<TokenDecoder>;
   let tokenEncoder: MockProxy<TokenEncoder>;
 
+  const TOKEN_PAYLOAD = {};
+  const token = "any_token";
+
   beforeAll(() => {
     tokenDecoder = mock();
     tokenEncoder = mock();
@@ -12,7 +15,7 @@ describe("hash-user-password", () => {
 
   test("shoud call token encoder", () => {
     const tokenEncoderSpy = jest.spyOn(tokenEncoder, "generateToken");
-    tokenEncoder.generateToken("any_data");
+    tokenEncoder.generateToken(TOKEN_PAYLOAD);
     expect(tokenEncoderSpy).toHaveBeenCalled();
   });
 
@@ -20,5 +23,17 @@ describe("hash-user-password", () => {
     const tokenDecoderSpy = jest.spyOn(tokenDecoder, "decodeToken");
     tokenDecoder.decodeToken("any_token");
     expect(tokenDecoderSpy).toHaveBeenCalled();
+  });
+
+  test("shoud call should call token encoder with payload", () => {
+    const tokenDecoderSpy = jest.spyOn(tokenEncoder, "generateToken");
+    tokenEncoder.generateToken(TOKEN_PAYLOAD);
+    expect(tokenDecoderSpy).toHaveBeenCalledWith(TOKEN_PAYLOAD);
+  });
+
+  test("shoud call should call token decoder with token", () => {
+    const tokenDecoderSpy = jest.spyOn(tokenDecoder, "decodeToken");
+    tokenDecoder.decodeToken(token);
+    expect(tokenDecoderSpy).toHaveBeenCalledWith(token);
   });
 });
