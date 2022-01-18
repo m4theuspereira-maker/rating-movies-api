@@ -12,7 +12,6 @@ describe("hash-user-password", () => {
 
   beforeAll(() => {
     dateHelper = mock();
-    //dateHelper.getAgeByBirthDate.mockImplementationOnce(() => AGE);
   });
 
   test("should call method from data helper", () => {
