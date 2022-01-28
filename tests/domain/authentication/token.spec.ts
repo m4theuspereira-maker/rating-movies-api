@@ -7,7 +7,7 @@ describe("token", () => {
 
   const TOKEN_PAYLOAD: GenerateTokenDto = {
     id: "any_id",
-    type: "any_type",
+    role: "any_role",
     password: "any_password",
     isActive: true,
   };
