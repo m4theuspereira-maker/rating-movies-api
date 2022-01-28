@@ -2,8 +2,14 @@ import { ServerError } from "@/infraestructure/errors/server-error";
 
 export interface GenerateTokenDto {
   id: string;
-  type: string;
+  role: string;
   password: string;
+  isActive: boolean;
+}
+
+export interface UserAuthenticatedData {
+  id: string;
+  role: string;
   isActive: boolean;
 }
 
@@ -14,5 +20,5 @@ export interface TokenEncoder {
   ): Promise<TokenCreationResult>;
 }
 export interface TokenDecoder {
-  decodeToken(token: string): Promise<any>;
+  decodeToken(token: string): UserAuthenticatedData;
 }
