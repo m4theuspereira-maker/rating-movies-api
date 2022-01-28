@@ -1,4 +1,4 @@
-import { TokenEncoder } from "@/domain/authentication/token";
+import { TokenDecoder, TokenEncoder } from "@/domain/authentication/token";
 import { ServerError } from "@/infraestructure/errors/server-error";
 import { mock, MockProxy } from "jest-mock-extended";
 import { Jsonwebtoken } from "@/infraestructure/encrypter/token/jsonwebtoken";
@@ -6,19 +6,27 @@ import { AuthenticationError } from "@/infraestructure/errors/authentication-err
 
 describe("jsonwebtoken test", () => {
   let tokenEncoder: MockProxy<TokenEncoder>;
+  let tokenDecoder: MockProxy<TokenDecoder>;
   let Jsonwebtoken: MockProxy<Jsonwebtoken>;
   let generateTokenTest: any;
+  let tokenDecoded: any;
   const TOKEN_ENCODED = "any_token_encoded";
+  const TOKEN_DECODED = {
+    id: "any_id",
+    role: "any_role",
+    isActive: true,
+  };
 
   const TOKEN_PAYLOAD = {
     id: "any_id",
-    type: "any_type",
+    role: "any_role",
     password: "$any_password",
     isActive: true,
   };
 
   beforeAll(() => {
     tokenEncoder = mock();
+    tokenDecoder = mock();
     Jsonwebtoken = mock();
   });
 
@@ -26,6 +34,9 @@ describe("jsonwebtoken test", () => {
     generateTokenTest = jest
       .spyOn(Jsonwebtoken, "generateToken")
       .mockResolvedValue(TOKEN_ENCODED);
+    tokenDecoded = jest
+      .spyOn(Jsonwebtoken, "decodeToken")
+      .mockReturnValueOnce(TOKEN_DECODED);
   });
 
   test("should call generate token", async () => {
@@ -43,7 +54,7 @@ describe("jsonwebtoken test", () => {
     expect(tokenEncodedTest).toEqual(TOKEN_ENCODED);
   });
 
-  test("should throw a server erro if JWT throws", async () => {
+  test("should throw a authentication error if JWT throws", async () => {
     Jsonwebtoken.generateToken.mockRejectedValueOnce(() => {
       throw new AuthenticationError();
     });
@@ -51,5 +62,31 @@ describe("jsonwebtoken test", () => {
     const tokenEncodedTest = Jsonwebtoken.generateToken(TOKEN_PAYLOAD);
 
     await expect(tokenEncodedTest).rejects.toThrow(new AuthenticationError());
+  });
+
+  test("should call token decoder", async () => {
+    Jsonwebtoken.decodeToken(TOKEN_ENCODED);
+    expect(tokenDecoded).toHaveBeenCalled();
+  });
+
+  test("should call token decoder with token", async () => {
+    Jsonwebtoken.decodeToken(TOKEN_ENCODED);
+    expect(tokenDecoded).toHaveBeenCalledWith(TOKEN_ENCODED);
+  });
+
+  test("should call token decoder with token", async () => {
+    const tokenDecodedTest = Jsonwebtoken.decodeToken(TOKEN_ENCODED);
+    expect(tokenDecodedTest).toEqual(TOKEN_DECODED);
+  });
+
+  test("should throw a authentication error if JWT throws", () => {
+    try {
+      Jsonwebtoken.decodeToken.mockImplementationOnce(() => {
+        throw new AuthenticationError();
+      });
+      const tokenEncodedTest = Jsonwebtoken.decodeToken(TOKEN_ENCODED);
+
+      expect(tokenEncodedTest).toThrow(new AuthenticationError());
+    } catch (error) {}
   });
 });
