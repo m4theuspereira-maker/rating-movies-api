@@ -51,7 +51,7 @@ export class MovieEntity {
       actorsWithAge.some((actor) => actor.age < 1) || directorWithAge.age < 1;
 
     if (someActorOrDirectorWithNegativeAge) {
-      return new BusinessError();
+      throw new BusinessError();
     }
 
     const movie: Movie = {

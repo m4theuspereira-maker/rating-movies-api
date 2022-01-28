@@ -29,7 +29,7 @@ export class RatingEntity {
     const isScoreValid = this.validateScore(score);
 
     if (!isScoreValid) {
-      return new BusinessError();
+      throw new BusinessError();
     }
 
     rating = {
@@ -42,7 +42,7 @@ export class RatingEntity {
     if (comment !== undefined) {
       const isCommentValid = this.validateComment(comment);
       if (!isCommentValid) {
-        return new BusinessError();
+        throw new BusinessError();
       }
 
       rating.comment = comment;

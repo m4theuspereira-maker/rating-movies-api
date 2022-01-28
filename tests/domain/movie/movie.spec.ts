@@ -85,11 +85,13 @@ describe("Movie Entity", () => {
     });
   });
 
-  test("should return an error if invalid age", () => {
-    dateHelper.getAgeByBirthDate.mockImplementationOnce(() => -22);
+  test("should return business error if invalid age", () => {
+    try {
+      dateHelper.getAgeByBirthDate.mockImplementationOnce(() => -22);
 
-    const movie = movieEntitySut.createMovie(MOVIE_DATA);
+      const movie = movieEntitySut.createMovie(MOVIE_DATA);
 
-    expect(movie).toStrictEqual(new BusinessError());
+      expect(movie).toThrow(new BusinessError());
+    } catch (error) {}
   });
 });

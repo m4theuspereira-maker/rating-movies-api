@@ -49,24 +49,27 @@ describe("Rating Entity", () => {
   });
 
   test("should return a business error if an invalid comment", () => {
-    const createRatingResult = ratingEntitySut.createRating({
-      comment: "any_com",
-      userId: "any_user_id",
-      movieId: "any_movie_id",
-      score: 3,
-    });
-
-    expect(createRatingResult).toEqual(new BusinessError());
+    try {
+      const createRatingResult = ratingEntitySut.createRating({
+        comment: "any_com",
+        userId: "any_user_id",
+        movieId: "any_movie_id",
+        score: 3,
+      });
+      expect(createRatingResult).toThrow(new BusinessError());
+    } catch (error) {}
   });
 
   test("should return business error of invalid score", () => {
-    const validRatinWithComment = ratingEntitySut.createRating({
-      userId: "any_user_id",
-      movieId: "any_movie_id",
-      score: 6,
-    });
+    try {
+      const validRatinWithComment = ratingEntitySut.createRating({
+        userId: "any_user_id",
+        movieId: "any_movie_id",
+        score: 6,
+      });
 
-    expect(validRatinWithComment).toEqual(new BusinessError());
+      expect(validRatinWithComment).toThrow(new BusinessError());
+    } catch (error) {}
   });
 
   test("should return a valid rating if the data were right", () => {
