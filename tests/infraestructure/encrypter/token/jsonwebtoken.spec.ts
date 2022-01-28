@@ -36,7 +36,7 @@ describe("jsonwebtoken test", () => {
       .mockResolvedValue(TOKEN_ENCODED);
     tokenDecoded = jest
       .spyOn(Jsonwebtoken, "decodeToken")
-      .mockReturnValueOnce(TOKEN_DECODED);
+      .mockReturnValue(TOKEN_DECODED);
   });
 
   test("should call generate token", async () => {
