@@ -6,7 +6,17 @@
     "constructor-super": "off",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/parser": "off",
-    "@typescript-eslint/indent": "off"
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/dot-notation": "off",
+    "@typescript-eslint/no-throw-literal": "off",
+    "@typescript-eslint/no-base-to-string": "off",
+    "@typescript-eslint/no-floating-promises": "off"
   },
-  "extends": "standard-with-typescript"
+  "extends": "standard-with-typescript",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "tsconfigRootDir": "src",
+    "project": ["./tsconfig.json"]
+  }
 }
