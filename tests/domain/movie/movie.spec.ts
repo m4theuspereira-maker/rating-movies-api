@@ -86,12 +86,10 @@ describe("Movie Entity", () => {
   });
 
   test("should return business error if invalid age", () => {
-    try {
-      dateHelper.getAgeByBirthDate.mockImplementationOnce(() => -22);
+    dateHelper.getAgeByBirthDate.mockImplementationOnce(() => -22);
 
-      const movie = movieEntitySut.createMovie(MOVIE_DATA);
-
-      expect(movie).toThrow(new BusinessError());
-    } catch (error) {}
+    expect(() => {
+      movieEntitySut.createMovie(MOVIE_DATA);
+    }).toThrowError(new BusinessError());
   });
 });
