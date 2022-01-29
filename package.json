@@ -22,5 +22,11 @@
   "dependencies": {
     "@types/argon2": "^0.15.0",
     "argon2": "^0.28.3"
+  },
+  "lint-staged": {
+    "**/*.{ts,js}": [
+      "yarn eslint",
+      "yarn test --watchAll=false findRealatedTests --hail"
+    ]
   }
 }
