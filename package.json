@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "@types/argon2": "^0.15.0",
-    "argon2": "^0.28.3"
+    "@types/mongoose": "^5.11.97",
+    "argon2": "^0.28.3",
+    "mongoose": "^6.1.8"
   },
   "lint-staged": {
     "**/*.{ts,js}": [
