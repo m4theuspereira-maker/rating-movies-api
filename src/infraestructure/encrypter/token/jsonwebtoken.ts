@@ -2,7 +2,7 @@ import {
   GenerateTokenDto,
   TokenDecoder,
   TokenEncoder,
-  UserAuthenticatedData,
+  UserAuthenticatedData
 } from "@/domain/authentication/token";
 import { AuthenticationError } from "@/infraestructure/errors/authentication-error";
 import { verify } from "argon2";
@@ -13,14 +13,14 @@ export class Jsonwebtoken implements TokenDecoder, TokenEncoder {
     id,
     role,
     password,
-    isActive,
+    isActive
   }: GenerateTokenDto): Promise<string> {
     try {
       const isPasswordValid = await verify("userPassword", password);
       let token = "";
       if (isPasswordValid) {
         token = jwt.sign({ id, role, isActive }, "api_secret", {
-          expiresIn: "12h",
+          expiresIn: "12h"
         });
       }
 
@@ -43,7 +43,7 @@ export class Jsonwebtoken implements TokenDecoder, TokenEncoder {
       const userVeryfiedData = {
         id,
         role,
-        isActive,
+        isActive
       };
 
       return userVeryfiedData;
