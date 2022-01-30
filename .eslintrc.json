@@ -10,13 +10,16 @@
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/no-base-to-string": "off",
-    "@typescript-eslint/no-floating-promises": "off"
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/quotes": "off",
+    "@typescript-eslint/comma-dangle": "off",
+    "@typescript-eslint/method-signature-style": "off"
   },
   "extends": "standard-with-typescript",
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
-    "tsconfigRootDir": "src",
-    "project": ["./tsconfig.json"]
+    "tsconfigRootDir": "./",
+    "project": "./tsconfig.json"
   }
 }
