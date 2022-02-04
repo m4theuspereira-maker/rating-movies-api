@@ -22,21 +22,20 @@ export class RatingEntity {
     movieId,
     score,
     comment,
-    userId,
+    userId
   }: createRatingDto): RatingCreationResult {
-    let rating: Rating;
-
     const isScoreValid = this.validateScore(score);
 
     if (!isScoreValid) {
       throw new BusinessError();
     }
 
-    rating = {
+  // eslint-disable-next-line prefer-const
+  let rating: Rating = {
       userId: userId,
       movieId: movieId,
       score: score,
-      isActive: true,
+      isActive: true
     };
 
     if (comment !== undefined) {
