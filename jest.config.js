@@ -1,4 +1,4 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/**@type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
@@ -7,6 +7,7 @@ module.exports = {
     "!<rootDir>/src/main/**",
     "!<rootDir>/src/**/index.ts",
   ],
+  preset: '@shelf/jest-mongodb',
   coverageDirectory: "coverage",
   coverageProvider: "babel",
   moduleNameMapper: {
