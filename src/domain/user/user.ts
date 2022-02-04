@@ -18,7 +18,7 @@ export interface createUserDto {
 
 export const USER_ROLES = {
   ADM: "adm",
-  USER: "user",
+  USER: "user"
 };
 
 export type UserCreationResult = BusinessError | User;
@@ -47,7 +47,7 @@ export class UserEntity {
       email: user.email,
       password: passwordHashed,
       isActive: true,
-      role: USER_ROLES.USER,
+      role: USER_ROLES.USER
     };
 
     return validUser;
