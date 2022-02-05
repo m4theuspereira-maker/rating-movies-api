@@ -17,13 +17,22 @@ describe("SaveUserRepository", () => {
     saveUserRepositroryMock = mock();
   });
 
-  it("should be called with a valid password", () => {
+  it("should be called", () => {
     const saveUserRepositorySpy = jest.spyOn(
       saveUserRepositroryMock,
       "saveUser"
     );
     saveUserRepositroryMock.saveUser(VALID_USER);
     expect(saveUserRepositorySpy).toHaveBeenCalled();
+  });
+
+  it("should be called with valid User", () => {
+    const saveUserRepositorySpy = jest.spyOn(
+      saveUserRepositroryMock,
+      "saveUser"
+    );
+    saveUserRepositroryMock.saveUser(VALID_USER);
+    expect(saveUserRepositorySpy).toHaveBeenLastCalledWith(VALID_USER);
   });
 
 });
