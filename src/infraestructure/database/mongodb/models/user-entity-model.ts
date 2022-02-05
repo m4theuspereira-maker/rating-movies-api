@@ -1,7 +1,7 @@
-import { UserEntity } from "@/domain/user/user";
+import { User } from "@/domain/user/user";
 import { Types, Document, Schema, model } from "mongoose";
 
-export interface IModelUser extends Document<UserEntity> {}
+export interface IModelUser extends Document<User> {}
 
 const userSchema = new Schema({
   _id: {
