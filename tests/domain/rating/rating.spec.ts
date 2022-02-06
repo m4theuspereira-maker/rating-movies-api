@@ -7,7 +7,7 @@ describe("Rating Entity", () => {
     userId: "any_user_id",
     movieId: "any_movie_id",
     score: 3,
-    comment: "any_comment",
+    comment: "any_comment"
   };
 
   beforeAll(() => {
@@ -51,7 +51,7 @@ describe("Rating Entity", () => {
         comment: "any_com",
         userId: "any_user_id",
         movieId: "any_movie_id",
-        score: 3,
+        score: 3
       });
     }).toThrowError(new BusinessError());
   });
@@ -61,7 +61,7 @@ describe("Rating Entity", () => {
       ratingEntitySut.createRating({
         userId: "any_user_id",
         movieId: "any_movie_id",
-        score: 6,
+        score: 6
       });
     }).toThrowError(new BusinessError());
   });
@@ -74,7 +74,7 @@ describe("Rating Entity", () => {
       movieId: "any_movie_id",
       score: 3,
       isActive: true,
-      comment: "any_comment",
+      comment: "any_comment"
     });
   });
 
@@ -82,14 +82,14 @@ describe("Rating Entity", () => {
     const validRatingWithoutComment = ratingEntitySut.createRating({
       userId: "any_user_id",
       movieId: "any_movie_id",
-      score: 3,
+      score: 3
     });
 
     expect(validRatingWithoutComment).toStrictEqual({
       userId: "any_user_id",
       movieId: "any_movie_id",
       score: 3,
-      isActive: true,
+      isActive: true
     });
   });
 });

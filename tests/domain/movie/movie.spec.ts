@@ -15,27 +15,27 @@ describe("Movie Entity", () => {
         birthDate: {
           day: "01",
           month: "01",
-          year: "2000",
-        },
+          year: "2000"
+        }
       },
       {
         name: "any_name_actor_2",
         birthDate: {
           day: "01",
           month: "01",
-          year: "2000",
-        },
-      },
+          year: "2000"
+        }
+      }
     ],
     director: {
       name: "any_name_actor",
       birthDate: {
         day: "01",
         month: "01",
-        year: "2000",
-      },
+        year: "2000"
+      }
     },
-    gender: "any_gender",
+    gender: "any_gender"
   };
 
   beforeAll(() => {
@@ -64,24 +64,25 @@ describe("Movie Entity", () => {
   test("should return a movie", () => {
     const movie = movieEntitySut.createMovie(MOVIE_DATA);
 
-    expect(movie).toStrictEqual({
+    expect(movie).toMatchObject({
       title: "any_movie_title",
       actors: [
         {
           name: "any_name_actor",
-          age: 22,
+          age: 22
         },
         {
           name: "any_name_actor_2",
-          age: 22,
-        },
+          age: 22
+        }
       ],
       director: {
         name: "any_name_actor",
-        age: 22,
+        age: 22
       },
 
       gender: "any_gender",
+      createdAt: new Date()
     });
   });
 
