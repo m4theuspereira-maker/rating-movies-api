@@ -105,6 +105,7 @@ describe("UserEntity", () => {
       password: hashed,
       role: USER_ROLES.USER,
       isActive: true,
+      createdAt: new Date()
     });
   });
 });

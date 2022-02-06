@@ -7,6 +7,8 @@ export interface User {
   password: string;
   isActive: boolean;
   role: string;
+  createdAt: Date;
+  updatedAt?: Date;
 }
 
 export interface createUserDto {
@@ -47,7 +49,8 @@ export class UserEntity {
       email: user.email,
       password: passwordHashed,
       isActive: true,
-      role: USER_ROLES.USER
+      role: USER_ROLES.USER,
+      createdAt: new Date()
     };
 
     return validUser;

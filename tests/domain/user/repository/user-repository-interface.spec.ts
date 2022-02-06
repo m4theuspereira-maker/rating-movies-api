@@ -8,7 +8,8 @@ describe("SaveUserRepository", () => {
     email: "any_email@mail.com",
     password: "hashed",
     role: USER_ROLES.USER,
-    isActive: true
+    isActive: true, 
+    createdAt: new Date()
   };
 
   let saveUserRepositroryMock: MockProxy<ISaveUserRepository>;
