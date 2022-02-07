@@ -3,6 +3,8 @@ import { mock, MockProxy } from "jest-mock-extended";
 import { DateHelper } from "@/domain/date/date-helper";
 import { BusinessError } from "@/domain/errors/business-error";
 
+jest.useFakeTimers().setSystemTime(new Date("2022-01-01").getTime());
+
 describe("Movie Entity", () => {
   let movieEntity: MockProxy<MovieEntity>;
   let dateHelper: MockProxy<DateHelper>;
