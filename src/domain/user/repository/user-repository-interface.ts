@@ -1,5 +1,5 @@
 import { User } from "../user";
 
 export interface ISaveUserRepository {
-    saveUser (user: User): Promise<boolean>
+    saveUser (user: User): Promise<void>
 }
