@@ -1,7 +1,8 @@
 import { ISaveUserRepository } from "@/domain/user/repository/user-repository-interface";
 import { User, USER_ROLES } from "@/domain/user/user";
 import { ServerError } from "@/infraestructure/errors/server-error";
-import { connect, connection, disconnect } from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
+import mongoose from "mongoose";
 
 const VALID_USER = {
   name: "any name",
@@ -12,20 +13,31 @@ const VALID_USER = {
   createdAt: new Date()
 };
 
+async function startDatabase() {
+  const mongooseDatabse = await MongoMemoryServer.create();
+
+  const uri = mongooseDatabse.getUri();
+  const { connection } = await mongoose.connect(uri);
+  return connection;
+}
+async function seedDatabase() {
+  const { db } = await startDatabase();
+  const userCollection = db.collection("user");
+  userCollection.insertMany([VALID_USER]);
+}
+
+async function dropDatabase() {
+  const { db } = await startDatabase();
+  db.dropCollection("user");
+}
 describe("User repository", () => {
- 
-  it("should should insrt", async () => {
+  // beforeAll(async () => {
+  //   await seedDatabase();
+  // });
+  // afterAll(async () => {
+  //   await dropDatabase();
+  // });
+  it("should should insrt", () => {
     expect(1 + 1).toEqual(2);
   });
 });
-
-// export class UserRepository implements ISaveUserRepository {
-//   async saveUser(user: User): Promise<void> {
-//     try {
-//       const userCollection = getUserCollection();
-//       userCollection.insertOne(user);
-//     } catch (error) {
-//       throw new ServerError();
-//     }
-//   }
-// }
