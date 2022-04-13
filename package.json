@@ -1,7 +1,7 @@
 {
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test": "jest --passWithNoTests --no-cache --runInBand --detectOpenHandles",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "yarn test -- --coverage",
     "test:staged": "yarn test -- --findRelatedTests",
