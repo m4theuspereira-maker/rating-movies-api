@@ -11,7 +11,7 @@ describe("UserEntity", () => {
     name: "any name",
     email: "any_email@mail.com",
     password: "any_password",
-    passwordRepeat: "any_password",
+    passwordRepeat: "any_password"
   };
   const hashed = "any_password_hashed";
 
@@ -62,7 +62,7 @@ describe("UserEntity", () => {
       name: "any name",
       email: "any_email@mail.com",
       password: "any_password",
-      passwordRepeat: "some_password",
+      passwordRepeat: "some_password"
     });
 
     expect(userCreated).toEqual(new BusinessError());
@@ -85,7 +85,7 @@ describe("UserEntity", () => {
       name: "any name",
       email: "any_emaimail.com",
       password: "any_password",
-      passwordRepeat: "any_password",
+      passwordRepeat: "any_password"
     });
 
     expect(invalidUser).toEqual(new BusinessError());
@@ -96,10 +96,10 @@ describe("UserEntity", () => {
       name: "any name",
       email: "any_email@mail.com",
       password: "any_password",
-      passwordRepeat: "any_password",
+      passwordRepeat: "any_password"
     });
 
-    expect(validUser).toStrictEqual({
+    expect(validUser).toEqual({
       name: "any name",
       email: "any_email@mail.com",
       password: hashed,
