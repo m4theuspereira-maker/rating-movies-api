@@ -6,6 +6,7 @@ export interface IModelUser extends Document<User> {}
 const userSchema = new Schema({
   _id: {
     type: Types.ObjectId,
+    default: new Types.ObjectId(),
     required: false
   },
   name: {
@@ -31,4 +32,4 @@ const userSchema = new Schema({
   }
 });
 
-export const ChatModel = model<IModelUser>('user', userSchema);
+export const UserModel = model<IModelUser>("user", userSchema);
