@@ -14,7 +14,8 @@
     "@typescript-eslint/quotes": "off",
     "@typescript-eslint/comma-dangle": "off",
     "@typescript-eslint/method-signature-style": "off",
-    "@typescript-eslint/lines-between-class-members": "off"
+    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/brace-style": "off"
   },
   "extends": "standard-with-typescript",
   "parser": "@typescript-eslint/parser",

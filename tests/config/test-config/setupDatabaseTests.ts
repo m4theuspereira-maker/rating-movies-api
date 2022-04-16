@@ -8,7 +8,6 @@ export async function startDatabase() {
   try {
     const mongooseDatabse = await MongoMemoryServer.create();
     const uri = mongooseDatabse.getUri();
-    console.log(uri);
     const { connection } = await mongoose.connect(uri);
     databaseConnection = connection;
   } catch (error) {
