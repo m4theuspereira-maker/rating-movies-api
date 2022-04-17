@@ -6,6 +6,7 @@ import {
 } from "../../../../config/test-config/setupDatabaseTests";
 import { UserRepository } from "@/infraestructure/database/mongodb/repositories/user/user-repository";
 import { UserModel } from "@/infraestructure/database/mongodb/models/user-entity-model";
+import { userRepositoryFactory } from "@/config/factories/user-repoistory.factory";
 
 export const VALID_ADM = {
   name: "any name",
@@ -17,7 +18,7 @@ export const VALID_ADM = {
 };
 
 describe("User repository", () => {
-  const userRepository = new UserRepository(UserModel);
+  const userRepository = userRepositoryFactory();
   beforeAll(async () => {
     await startDatabase();
     await seedDatabase();
@@ -26,6 +27,7 @@ describe("User repository", () => {
     await dropDatabase();
     setTimeout(() => process.exit(), 4000);
   });
+
   it("should insert an user into database and then verify it", async () => {
     const usersBeforeInsertion = await userRepository.findUsers();
     await userRepository.saveUser(VALID_ADM);
