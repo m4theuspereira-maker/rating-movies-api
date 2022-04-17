@@ -8,6 +8,7 @@ import { UserRepository } from "@/infraestructure/database/mongodb/repositories/
 import { UserModel } from "@/infraestructure/database/mongodb/models/user-entity-model";
 import { userRepositoryFactory } from "@/config/factories/user-repoistory.factory";
 import { Types } from "mongoose";
+import { ServerError } from "@/infraestructure/errors/server-error";
 
 export const VALID_ADM = {
   name: "any name",
@@ -27,6 +28,8 @@ export const USER_TO_BE_EDITED = {
   isActive: true,
   createdAt: new Date()
 };
+
+const INVALID_PAYLOAD = "INVALID PAYLOAD";
 
 describe("User repository", () => {
   const userRepository = userRepositoryFactory();
@@ -55,5 +58,14 @@ describe("User repository", () => {
     );
 
     expect(updateResult.modifiedCount).toEqual(1);
+  });
+
+  it("should return ackowledge false", async () => {
+    const userUpdated = await userRepository.editUser(
+      String(USER_TO_BE_EDITED._id),
+      INVALID_PAYLOAD
+    );
+
+    expect(userUpdated.acknowledged).toEqual(false);
   });
 });
