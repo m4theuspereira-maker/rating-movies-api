@@ -10,10 +10,9 @@ export interface User {
   createdAt: Date;
   updatedAt?: Date;
 }
-export type ObjectId = "/^[0-9a-fA-F]{24}$/";
 
 export interface findUsersDto {
-  _id: ObjectId;
+  _id: string;
   name: string;
   email: string;
   password: string;
