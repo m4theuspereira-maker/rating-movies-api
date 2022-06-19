@@ -14,14 +14,14 @@ describe("jsonwebtoken test", () => {
   const TOKEN_DECODED = {
     id: "any_id",
     role: "any_role",
-    isActive: true,
+    isActive: true
   };
 
   const TOKEN_PAYLOAD = {
     id: "any_id",
     role: "any_role",
     password: "$any_password",
-    isActive: true,
+    isActive: true
   };
 
   beforeAll(() => {
@@ -80,13 +80,12 @@ describe("jsonwebtoken test", () => {
   });
 
   test("should throw a authentication error if JWT throws", () => {
-    try {
-      Jsonwebtoken.decodeToken.mockImplementationOnce(() => {
-        throw new AuthenticationError();
-      });
-      const tokenEncodedTest = Jsonwebtoken.decodeToken(TOKEN_ENCODED);
+    Jsonwebtoken.decodeToken.mockImplementationOnce(() => {
+      throw new AuthenticationError();
+    });
 
-      expect(tokenEncodedTest).toThrow(new AuthenticationError());
-    } catch (error) {}
+    expect(() => {
+      Jsonwebtoken.decodeToken(TOKEN_ENCODED);
+    }).toThrow(new AuthenticationError());
   });
 });
